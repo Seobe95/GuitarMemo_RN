@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  GuitarMemoApp
+//
+//  Created by 이명섭 on 8/27/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include? "tmp.xcconfig"
