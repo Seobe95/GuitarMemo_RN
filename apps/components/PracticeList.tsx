@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useContext } from "react";
 import { ColorsType, makeThemeColor } from "../utils/themeColor";
 import { ThemeContext } from "../context/ColorThemeContext";
@@ -6,7 +6,7 @@ import { ThemeContext } from "../context/ColorThemeContext";
 type PracticeItemProps = {
   title: string;
   content: string;
-  coverImage: string;
+  coverImageUrl: string;
   createdAt: Date;
   id: number;
 };
@@ -16,14 +16,14 @@ const datas: PracticeItemProps[] = [
     id: 0,
     title: "사랑의 미학",
     content: "연습했다잉",
-    coverImage: "",
+    coverImageUrl: "https://i.scdn.co/image/ab67616d0000b273149023dcdf178cffc8b994c3",
     createdAt: new Date(),
   },
   {
     id: 1,
     title: "No Pain",
     content: "연습했다잉2",
-    coverImage: "",
+    coverImageUrl: "https://i.scdn.co/image/ab67616d00004851ca88c0dcebddf74a98c46134",
     createdAt: new Date(),
   },
 ];
@@ -43,14 +43,25 @@ export default function PracticeList() {
 }
 
 function PracticeItem({ props }: { props: PracticeItemProps }) {
-  const { id, content, coverImage, createdAt, title } = props;
-  const theme = useContext(ThemeContext);
-  const themeColor = makeThemeColor({ usersColorScheme: theme });
+  const { id, content, coverImageUrl, createdAt, title } = props;
+  const themeColor = useContext(ThemeContext);
   const styles = makeStyles(themeColor);
 
   return (
     <View style={[styles.container, id == 0 && styles.itemMargin]}>
-      <Text style={styles.font}>{title}</Text>
+      <View>
+        <Image
+          style={styles.songsCover}
+          alt="Practice Album Cover"
+          source={{
+            uri: coverImageUrl,
+          }}
+        />
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={[styles.defaultFont, styles.titleFont]}>{title}</Text>
+        <Text style={[styles.defaultFont]}>{content}</Text>
+      </View>
     </View>
   );
 }
@@ -61,12 +72,31 @@ const makeStyles = (color: ColorsType) =>
       backgroundColor: color.backgroundColor,
       minHeight: 80,
       borderRadius: 10,
+      padding: 16,
+      justifyContent: "flex-start",
+      alignItems: "center",
+      flexDirection: "row",
+      gap: 16,
     },
-    font: {
+    defaultFont: {
       color: color.fontColor,
+    },
+    titleFont: {
+      fontWeight: "bold",
+      fontSize: 16,
+    },
+    contentFont: {
+      fontSize: 12,
+    },
+    songsCover: {
+      width: 60,
+      height: 60,
     },
     itemMargin: {
       marginVertical: 16,
+    },
+    textContainer: {
+      flexDirection: "column",
     },
   });
 
