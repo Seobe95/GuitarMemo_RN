@@ -3,19 +3,34 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Setting from "../screens/Setting";
 import Tuner from "../screens/Tuner";
 import Practice from "../screens/Practice";
-import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
 import Icon from "react-native-vector-icons/Ionicons";
 import { NavigationContainer } from "@react-navigation/native";
 import { ThemeContext } from "../context/ColorThemeContext";
 import { Text, TouchableOpacity } from "react-native";
 import PracticePost from "../screens/PracticePost";
+import Search from "../screens/Search";
 
-type StackNavigationParamList = {
+export type StackNavigationParamList = {
   Main: undefined;
   Post: undefined;
+  /**
+   * 검색화면으로 이동 시 autofocus 활성/비활성 여부
+   */
+  Search: { keyboardAutoFocus: boolean };
 };
 
-type TabNavigationProps = NativeStackScreenProps<StackNavigationParamList, "Main">;
+export type StackNavigationProp =
+  NativeStackNavigationProp<StackNavigationParamList>;
+
+type TabNavigationProps = NativeStackScreenProps<
+  StackNavigationParamList,
+  "Main"
+>;
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<StackNavigationParamList>();
@@ -40,7 +55,9 @@ function TabNavigation({ navigation, route }: TabNavigationProps) {
               iconName = !focused ? "newspaper-sharp" : "newspaper-outline";
               break;
             case "Tuner":
-              iconName = !focused ? "musical-notes-outline" : "musical-notes-sharp";
+              iconName = !focused
+                ? "musical-notes-outline"
+                : "musical-notes-sharp";
               break;
             default:
               iconName = !focused ? "settings-outline" : "settings-sharp";
@@ -60,14 +77,28 @@ function TabNavigation({ navigation, route }: TabNavigationProps) {
           headerShown: true,
           headerTitle: "",
           headerRight: () => (
-            <TouchableOpacity style={{ marginRight: 16 }} onPress={() => navigation.push("Post")}>
-              <Icon name={"add-outline"} size={32} color={themeColor.iconColor} />
+            <TouchableOpacity
+              style={{ marginRight: 16 }}
+              onPress={() => navigation.push("Post")}>
+              <Icon
+                name={"add-outline"}
+                size={32}
+                color={themeColor.iconColor}
+              />
             </TouchableOpacity>
           ),
         }}
       />
-      <Tab.Screen name="Tuner" component={Tuner} options={{ headerShown: false }} />
-      <Tab.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
+      <Tab.Screen
+        name="Tuner"
+        component={Tuner}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Setting"
+        component={Setting}
+        options={{ headerShown: false }}
+      />
     </Tab.Navigator>
   );
 }
@@ -77,7 +108,11 @@ export default function StackNavigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={TabNavigation} options={{ headerShown: false }} />
+        <Stack.Screen
+          name="Main"
+          component={TabNavigation}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Post"
           component={PracticePost}
@@ -89,6 +124,29 @@ export default function StackNavigation() {
             headerTitleStyle: {
               color: themeColor.fontColor,
             },
+            headerRight: () => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    console.log("Post");
+                  }}>
+                  <Text
+                    style={{
+                      color: themeColor.secondary,
+                    }}>
+                    Post
+                  </Text>
+                </TouchableOpacity>
+              );
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Search"
+          component={Search}
+          options={{
+            animation: "fade",
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

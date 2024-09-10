@@ -1,14 +1,14 @@
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import React, { useContext } from "react";
-import { ColorsType, makeThemeColor } from "../utils/themeColor";
+import { ColorsType } from "../style/themeColor";
 import { ThemeContext } from "../context/ColorThemeContext";
 
 type PracticeItemProps = {
+  id: number;
   title: string;
   content: string;
   coverImageUrl: string;
   createdAt: Date;
-  id: number;
 };
 
 const datas: PracticeItemProps[] = [
@@ -16,14 +16,16 @@ const datas: PracticeItemProps[] = [
     id: 0,
     title: "사랑의 미학",
     content: "연습했다잉",
-    coverImageUrl: "https://i.scdn.co/image/ab67616d0000b273149023dcdf178cffc8b994c3",
+    coverImageUrl:
+      "https://i.scdn.co/image/ab67616d0000b273149023dcdf178cffc8b994c3",
     createdAt: new Date(),
   },
   {
     id: 1,
     title: "No Pain",
     content: "연습했다잉2",
-    coverImageUrl: "https://i.scdn.co/image/ab67616d00004851ca88c0dcebddf74a98c46134",
+    coverImageUrl:
+      "https://i.scdn.co/image/ab67616d00004851ca88c0dcebddf74a98c46134",
     createdAt: new Date(),
   },
 ];
@@ -70,9 +72,9 @@ const makeStyles = (color: ColorsType) =>
   StyleSheet.create({
     container: {
       backgroundColor: color.backgroundColor,
-      minHeight: 80,
+      minHeight: 60,
       borderRadius: 10,
-      padding: 16,
+      padding: 8,
       justifyContent: "flex-start",
       alignItems: "center",
       flexDirection: "row",

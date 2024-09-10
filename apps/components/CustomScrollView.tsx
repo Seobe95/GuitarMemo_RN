@@ -1,14 +1,23 @@
-import { ScrollView, ScrollViewProps, StyleSheet, View, ViewProps } from "react-native";
+import {
+  ScrollView,
+  ScrollViewProps,
+  StyleSheet,
+  View,
+  ViewProps,
+} from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeContext } from "../context/ColorThemeContext";
-import { ColorsType } from "../utils/themeColor";
+import { ColorsType } from "../style/themeColor";
 
 interface CustomViewChildrenProps extends ScrollViewProps {
   children: React.ReactNode;
 }
 
-export default function CustomScrollView({ children, ...props }: CustomViewChildrenProps) {
+export default function CustomScrollView({
+  children,
+  ...props
+}: CustomViewChildrenProps) {
   const themeColor = useContext(ThemeContext);
   const styles = makeStyles(themeColor);
 
