@@ -2,13 +2,16 @@ import { StyleSheet, View, ViewProps } from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeContext } from "../context/ColorThemeContext";
-import { ColorsType } from "../utils/themeColor";
+import { ColorsType } from "../style/themeColor";
 
 interface CustomViewChildrenProps extends ViewProps {
   children: React.ReactNode;
 }
 
-export default function CustomViewContainer({ children, ...props }: CustomViewChildrenProps) {
+export default function CustomViewContainer({
+  children,
+  ...props
+}: CustomViewChildrenProps) {
   const themeColor = useContext(ThemeContext);
   const styles = makeStyles(themeColor);
 
@@ -24,8 +27,7 @@ const makeStyles = (color: ColorsType) =>
     container: {
       width: "100%",
       height: "100%",
-      paddingHorizontal: 16,
-      paddingTop: 16,
+      // paddingHorizontal: 16,
       backgroundColor: color.backgroundColor_1,
     },
   });

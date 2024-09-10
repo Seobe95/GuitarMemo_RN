@@ -3,32 +3,24 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  TextInput,
   TouchableWithoutFeedback,
-  View,
 } from "react-native";
-import React, { useCallback, useContext, useRef } from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from "../context/ColorThemeContext";
-import { ColorsType } from "../utils/themeColor";
-import InputField from "../components/InputField";
+import { ColorsType } from "../style/themeColor";
 import CustomScrollView from "../components/CustomScrollView";
-import { usePostStore } from "../zustand/useSongSearchStore";
-import { useSpotifyAuthStore } from "../zustand/useSportifyAuthStore";
-import { debounce } from "lodash";
+import PostForm from "../components/PostForm";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackNavigationParamList } from "../components/Navigations";
 
-export default function PracticePost() {
+type PostNavigationProps = NativeStackScreenProps<
+  StackNavigationParamList,
+  "Post"
+>;
+
+export default function PracticePost({ navigation }: PostNavigationProps) {
   const themeColor = useContext(ThemeContext);
   const styles = makeStyle(themeColor);
-  const contentRef = useRef<TextInput | null>(null);
-  const searchSongsRef = useRef<TextInput | null>(null);
-  const { setTitle, setSongs, setContent, searchSongs } = usePostStore();
-  const { accessToken } = useSpotifyAuthStore();
-  const handleSearch = useCallback(
-    debounce(async () => {
-      await searchSongs(accessToken);
-    }, 1000),
-    [],
-  );
 
   return (
     <KeyboardAvoidingView
@@ -41,50 +33,14 @@ export default function PracticePost() {
         }}
         style={{ paddingBottom: 80 }}>
         <CustomScrollView style={styles.container}>
-          <InputField
-            label={"Title"}
-            placeholder="Please write down the title of the Practice!"
-            autoFocus={true}
-            returnKeyType="next"
-            contextMenuHidden={true}
-            onSubmitEditing={() => {
-              contentRef.current?.focus();
-            }}
-            onChangeText={setTitle}
-          />
-          <View style={styles.emptyBox} />
-          <InputField
-            ref={contentRef}
-            label={"Content"}
-            style={styles.contentInput}
-            multiline={true}
-            contextMenuHidden={true}
-            placeholder="Please write down the contents of the Practice!"
-            scrollEnabled={true}
-            numberOfLines={15}
-            onContentSizeChange={e => {
-              console.log(e.nativeEvent.contentSize.height);
-            }}
-            onChangeText={setContent}
-          />
-          <View style={styles.emptyBox} />
-          <InputField
-            ref={searchSongsRef}
-            label={"Songs"}
-            isSongs={true}
-            style={styles.searchInput}
-            placeholder="Please look up the song you practiced!"
-            onChangeText={async e => {
-              setSongs(e);
-              handleSearch();
-            }}
-          />
+          <PostForm navigation={navigation} />
         </CustomScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const makeStyle = (color: ColorsType) =>
   StyleSheet.create({
     container: {
