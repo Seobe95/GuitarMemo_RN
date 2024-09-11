@@ -1,6 +1,5 @@
 import { StyleSheet, View, ViewProps } from "react-native";
 import React, { useContext } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeContext } from "../context/ColorThemeContext";
 import { ColorsType } from "../style/themeColor";
 
@@ -8,10 +7,7 @@ interface CustomViewChildrenProps extends ViewProps {
   children: React.ReactNode;
 }
 
-export default function CustomViewContainer({
-  children,
-  ...props
-}: CustomViewChildrenProps) {
+export default function CustomViewContainer({ children, ...props }: CustomViewChildrenProps) {
   const themeColor = useContext(ThemeContext);
   const styles = makeStyles(themeColor);
 

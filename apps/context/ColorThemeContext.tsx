@@ -1,21 +1,17 @@
 import React, { createContext } from "react";
-import { ColorSchemeName, useColorScheme } from "react-native";
-import { ColorsType, makeThemeColor } from "../style/themeColor";
+import { useColorScheme } from "react-native";
+import {
+  ColorsType,
+  lightColorTheme,
+  makeThemeColor,
+} from "../style/themeColor";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
 };
 
 // 라이트모드의 기본 색상입니다.
-const ThemeContext = createContext<ColorsType>({
-  fontColor: "#000000", // 검은색 폰트
-  iconColor: "#000000", // 검은색 아이콘
-  backgroundColor: "#FFFFFF", // 흰색 배경
-  backgroundColor_1: "#F0F0F0", // 약간 어두운 흰색 배경 (서브 배경)
-  backgroundColor_2: "#E0E0E0", // 더 어두운 흰색 배경 (서브 배경)
-  primary: "#000000", // 기본 색상 (검은색)
-  secondary: "#7F7F7F", // 보조 색상 (중간 회색)
-});
+const ThemeContext = createContext<ColorsType>(lightColorTheme);
 
 function CustomThemeProvider({ children }: ThemeProviderProps) {
   const theme = useColorScheme();

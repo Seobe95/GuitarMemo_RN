@@ -13,7 +13,7 @@ export interface ColorsType {
   secondary: string;
 }
 
-const lightColorTheme: ColorsType = {
+export const lightColorTheme: ColorsType = {
   fontColor: "#000000", // 검은색 폰트
   iconColor: "#000000", // 검은색 아이콘
   backgroundColor: "#FFFFFF", // 흰색 배경
@@ -38,13 +38,6 @@ const darkColorTheme: ColorsType = {
  * @param ColorSchemeName 유저의 테마 타입입니다.
  * @returns 유저의 테마에 따라 모드에 맞는 theme이 return 됩니다. null & undefined => light
  */
-export const makeThemeColor = ({
-  usersColorScheme,
-}: {
-  usersColorScheme: ColorSchemeName;
-}): ColorsType => {
-  if (usersColorScheme == "dark") {
-    return darkColorTheme;
-  }
-  return lightColorTheme;
+export const makeThemeColor = ({ usersColorScheme }: { usersColorScheme: ColorSchemeName }): ColorsType => {
+  return usersColorScheme === "dark" ? darkColorTheme : lightColorTheme;
 };

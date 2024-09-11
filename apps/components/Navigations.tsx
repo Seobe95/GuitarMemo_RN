@@ -14,23 +14,17 @@ import { ThemeContext } from "../context/ColorThemeContext";
 import { Text, TouchableOpacity } from "react-native";
 import PracticePost from "../screens/PracticePost";
 import Search from "../screens/Search";
+import { usePostStore } from "../zustand/usePostStore";
 
 export type StackNavigationParamList = {
   Main: undefined;
   Post: undefined;
-  /**
-   * 검색화면으로 이동 시 autofocus 활성/비활성 여부
-   */
   Search: { keyboardAutoFocus: boolean };
 };
 
-export type StackNavigationProp =
-  NativeStackNavigationProp<StackNavigationParamList>;
+export type StackNavigationProp = NativeStackNavigationProp<StackNavigationParamList>;
 
-type TabNavigationProps = NativeStackScreenProps<
-  StackNavigationParamList,
-  "Main"
->;
+type TabNavigationProps = NativeStackScreenProps<StackNavigationParamList, "Main">;
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<StackNavigationParamList>();
@@ -55,9 +49,7 @@ function TabNavigation({ navigation, route }: TabNavigationProps) {
               iconName = !focused ? "newspaper-sharp" : "newspaper-outline";
               break;
             case "Tuner":
-              iconName = !focused
-                ? "musical-notes-outline"
-                : "musical-notes-sharp";
+              iconName = !focused ? "musical-notes-outline" : "musical-notes-sharp";
               break;
             default:
               iconName = !focused ? "settings-outline" : "settings-sharp";
@@ -77,42 +69,25 @@ function TabNavigation({ navigation, route }: TabNavigationProps) {
           headerShown: true,
           headerTitle: "",
           headerRight: () => (
-            <TouchableOpacity
-              style={{ marginRight: 16 }}
-              onPress={() => navigation.push("Post")}>
-              <Icon
-                name={"add-outline"}
-                size={32}
-                color={themeColor.iconColor}
-              />
+            <TouchableOpacity style={{ marginRight: 16 }} onPress={() => navigation.push("Post")}>
+              <Icon name={"add-outline"} size={32} color={themeColor.iconColor} />
             </TouchableOpacity>
           ),
         }}
       />
-      <Tab.Screen
-        name="Tuner"
-        component={Tuner}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="Setting"
-        component={Setting}
-        options={{ headerShown: false }}
-      />
+      <Tab.Screen name="Tuner" component={Tuner} options={{ headerShown: false }} />
+      <Tab.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
 }
 
 export default function StackNavigation() {
   const themeColor = useContext(ThemeContext);
+  const {} = usePostStore();
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Main"
-          component={TabNavigation}
-          options={{ headerShown: false }}
-        />
+        <Stack.Screen name="Main" component={TabNavigation} options={{ headerShown: false }} />
         <Stack.Screen
           name="Post"
           component={PracticePost}

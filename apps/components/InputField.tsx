@@ -13,47 +13,45 @@ interface InputFieldProps extends TextInputProps {
   label?: string;
 }
 
-const InputField = forwardRef<TextInput, InputFieldProps>(
-  ({ isSongs = false, label, ...props }, ref) => {
-    const navigation = useNavigation<StackNavigationProp>();
-    const themeColor = useContext(ThemeContext);
-    const styles = makeStyle(themeColor);
-    const { song, setSong } = usePostStore();
+const InputField = forwardRef<TextInput, InputFieldProps>(({ isSongs = false, label, ...props }, ref) => {
+  const navigation = useNavigation<StackNavigationProp>();
+  const themeColor = useContext(ThemeContext);
+  const styles = makeStyle(themeColor);
+  const { song, setSong } = usePostStore();
 
-    const presentTextInputOrSongResultItem = () => {
-      if (song !== null && isSongs) {
-        return (
-          <SearchListItem
-            style={styles.searchItem}
-            artist={song.artists[0].name}
-            song={song.name}
-            image={song.album.images[0].url}
-            onPress={() => {
-              navigation.navigate("Search", { keyboardAutoFocus: false });
-            }}
-          />
-        );
-      }
+  const presentTextInputOrSongResultItem = () => {
+    if (song !== null && isSongs) {
       return (
-        <TextInput
-          {...props}
-          autoCapitalize={"none"}
-          clearButtonMode="always"
-          placeholderTextColor={themeColor.secondary}
-          style={[styles.input, props.style]}
-          ref={ref}
-          autoCorrect={false}
+        <SearchListItem
+          style={styles.searchItem}
+          artist={song.artists[0].name}
+          song={song.name}
+          image={song.album.images[0].url}
+          onPress={() => {
+            navigation.navigate("Search", { keyboardAutoFocus: false });
+          }}
         />
       );
-    };
+    }
     return (
-      <View style={styles.container}>
-        {label && <Text style={styles.label}>{label}</Text>}
-        {presentTextInputOrSongResultItem()}
-      </View>
+      <TextInput
+        {...props}
+        autoCapitalize={"none"}
+        clearButtonMode="always"
+        placeholderTextColor={themeColor.secondary}
+        style={[styles.input, props.style]}
+        ref={ref}
+        autoCorrect={false}
+      />
     );
-  },
-);
+  };
+  return (
+    <View style={styles.container}>
+      {label && <Text style={styles.label}>{label}</Text>}
+      {presentTextInputOrSongResultItem()}
+    </View>
+  );
+});
 
 const makeStyle = (color: ColorsType) =>
   StyleSheet.create({

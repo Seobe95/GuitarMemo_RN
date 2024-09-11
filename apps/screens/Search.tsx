@@ -1,15 +1,11 @@
 import { FlatList, StyleSheet, View } from "react-native";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeContext } from "../context/ColorThemeContext";
 import { ColorsType } from "../style/themeColor";
 import InputField from "../components/InputField";
 import CustomButton from "../components/CustomButton";
-import { useNavigation } from "@react-navigation/native";
-import {
-  StackNavigationParamList,
-  StackNavigationProp,
-} from "../components/Navigations";
+import { StackNavigationParamList } from "../components/Navigations";
 import { useSearchStore } from "../zustand/useSearchStore";
 import { debounce } from "lodash";
 import { useSpotifyAuthStore } from "../zustand/useSportifyAuthStore";
@@ -18,10 +14,7 @@ import SearchListItem from "../components/SearchListItem";
 import { usePostStore } from "../zustand/usePostStore";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-type SearchNavigationProps = NativeStackScreenProps<
-  StackNavigationParamList,
-  "Search"
->;
+type SearchNavigationProps = NativeStackScreenProps<StackNavigationParamList, "Search">;
 
 export default function Search({ navigation, route }: SearchNavigationProps) {
   const { searchSongs, setSearchParams, searchResult } = useSearchStore();
@@ -50,11 +43,7 @@ export default function Search({ navigation, route }: SearchNavigationProps) {
           }}
           returnKeyType="search"
         />
-        <CustomButton
-          title="Cancel"
-          style={styles.button}
-          onPress={() => navigation.goBack()}
-        />
+        <CustomButton title="Cancel" style={styles.button} onPress={() => navigation.goBack()} />
       </View>
       <CustomViewContainer style={styles.serachListContainer}>
         <FlatList

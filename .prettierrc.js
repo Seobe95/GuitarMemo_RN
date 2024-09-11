@@ -4,7 +4,7 @@ module.exports = {
   bracketSpacing: false,
   singleQuote: false,
   trailingComma: "all",
-  printWidth: 80,
+  printWidth: 120,
   parser: "typescript",
   bracketSpacing: true,
 };

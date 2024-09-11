@@ -39,18 +39,14 @@ export class SpotifyAPI {
 
     const options: RequestInit = {
       headers: {
-        Authorization:
-          "Basic " + Base64.encode(this.client_id + ":" + this.client_secret),
+        Authorization: "Basic " + Base64.encode(this.client_id + ":" + this.client_secret),
         "Content-Type": "application/x-www-form-urlencoded",
       },
       method: "POST",
       body: urlParams.toString(),
     };
 
-    const response = await fetch(
-      "https://accounts.spotify.com/api/token",
-      options,
-    );
+    const response = await fetch("https://accounts.spotify.com/api/token", options);
 
     if (200 <= response.status && response.status <= 299) {
       const result = (await response.json()) as SpotifyAuthToken;
@@ -162,10 +158,7 @@ export class SpotifyAPI {
         },
       };
 
-      return await fetch(
-        `https://api.spotify.com/v1/search?${url.toString()}`,
-        options,
-      );
+      return await fetch(`https://api.spotify.com/v1/search?${url.toString()}`, options);
     };
 
     try {

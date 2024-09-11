@@ -1,10 +1,4 @@
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import React, { useContext } from "react";
 import { ThemeContext } from "../context/ColorThemeContext";
 import { ColorsType } from "../style/themeColor";
@@ -13,10 +7,7 @@ import PostForm from "../components/PostForm";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StackNavigationParamList } from "../components/Navigations";
 
-type PostNavigationProps = NativeStackScreenProps<
-  StackNavigationParamList,
-  "Post"
->;
+type PostNavigationProps = NativeStackScreenProps<StackNavigationParamList, "Post">;
 
 export default function PracticePost({ navigation }: PostNavigationProps) {
   const themeColor = useContext(ThemeContext);

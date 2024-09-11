@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { SpotifyAPI } from "../api/SpotifyAPI";
 import { useSpotifyAuthStore } from "../zustand/useSportifyAuthStore";
 
 export default function useSpotifyAuth() {

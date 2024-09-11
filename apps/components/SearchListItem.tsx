@@ -1,11 +1,4 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View } from "react-native";
 import React, { useContext } from "react";
 import { ColorsType } from "../style/themeColor";
 import { ThemeContext } from "../context/ColorThemeContext";
@@ -16,12 +9,7 @@ interface SearchListItemProps extends TouchableOpacityProps {
   image?: string;
 }
 
-export default function SearchListItem({
-  artist,
-  image,
-  song,
-  ...props
-}: SearchListItemProps) {
+export default function SearchListItem({ artist, image, song, ...props }: SearchListItemProps) {
   const theme = useContext(ThemeContext);
   const styles = makeStyles(theme);
   return (

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import React, { useContext, useRef } from "react";
 import InputField from "./InputField";
 import { ThemeContext } from "../context/ColorThemeContext";
@@ -8,11 +8,7 @@ import { StackNavigationParamList } from "./Navigations";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type PostFormProps = {
-  navigation: NativeStackNavigationProp<
-    StackNavigationParamList,
-    "Post",
-    undefined
-  >;
+  navigation: NativeStackNavigationProp<StackNavigationParamList, "Post", undefined>;
 };
 
 export default function PostForm({ navigation }: PostFormProps) {

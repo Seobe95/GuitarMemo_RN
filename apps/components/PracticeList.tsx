@@ -16,16 +16,14 @@ const datas: PracticeItemProps[] = [
     id: 0,
     title: "사랑의 미학",
     content: "연습했다잉",
-    coverImageUrl:
-      "https://i.scdn.co/image/ab67616d0000b273149023dcdf178cffc8b994c3",
+    coverImageUrl: "https://i.scdn.co/image/ab67616d0000b273149023dcdf178cffc8b994c3",
     createdAt: new Date(),
   },
   {
     id: 1,
     title: "No Pain",
     content: "연습했다잉2",
-    coverImageUrl:
-      "https://i.scdn.co/image/ab67616d00004851ca88c0dcebddf74a98c46134",
+    coverImageUrl: "https://i.scdn.co/image/ab67616d00004851ca88c0dcebddf74a98c46134",
     createdAt: new Date(),
   },
 ];
